@@ -1,4 +1,4 @@
-enhancement: ["feature/*"]
+enhancement: ["feature/*", "enhancement/*"]
 bug: ["hotfix/*"]
 chore: ["chore/*"]
 dependencies: ["dependencies/*"]

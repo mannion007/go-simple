@@ -8,7 +8,7 @@ This project demonstrates a framework for a light version of [trunk based develo
 
 The following branch naming conventions should be used:
 
-Implementing new features: ```feature/*```
+Implementing new features: ```feature/*``` or ```enhancement/*```
 Hotfixing: ```hotfix/*```
 Chores (Refactoring, repaying tech debt): ```chore/*```
 Upgrading dependencies: ```dependencies/*```
