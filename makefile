@@ -1,6 +1,6 @@
 test: docker_build_test
 	docker-compose up -d
-	docker-compose exec -T test go test ./...
+	docker-compose exec -e CGO_ENABLED=0 -T test go test ./...
 	docker-compose down
 
 unit_test: 

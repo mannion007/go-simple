@@ -42,6 +42,8 @@ RUN go mod verify
 # Debug off
 RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -installsuffix cgo -ldflags="-w -s" -o /go/bin/app
 
+#ENTRYPOINT ["/go/bin/app"]
+
 ############################
 ########### PROD ###########
 ############################
