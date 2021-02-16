@@ -15,7 +15,7 @@ FROM golang:alpine as build
 # Install git
 RUN apk update && apk add --no-cache git
 
-# Create appuser
+# Create appuser with minimal priviliges
 ENV USER=appuser
 ENV UID=10001
 
@@ -39,6 +39,7 @@ RUN go mod verify
 # Build the binary
 # Don't need CGO, no interpolation with C libraries
 # Linux only, AMD64 only
+# Debug off
 RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -installsuffix cgo -ldflags="-w -s" -o /go/bin/app
 
 ############################
@@ -47,15 +48,14 @@ RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -installsuffix cgo -ldflag
 
 FROM scratch as prod
 
-# Import the user and group files from build
+# Import the unprivileged and group files from build
 COPY --from=build /etc/passwd /etc/passwd
 COPY --from=build /etc/group /etc/group
 
 # Copy app
 COPY --from=build /go/bin/app /go/bin/app
 
-# Use an unprivileged user
+# Use the unprivileged user
 USER appuser:appuser
 
-# Run the hello binary
 ENTRYPOINT ["/go/bin/app"]
