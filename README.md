@@ -2,6 +2,15 @@
 
 A template for a simple golang service which exposes an api. Mostly a sandbox for experimenting with tools for automating the mundane in small projects.
 
+## Dev environment
+
+The Dockerfile has a build stage which includes a dev stage for convenience.
+
+```
+docker build --target dev . -t e2e-dev
+docker run -it -p 8080:8080 -v ${PWD}:/go/src e2e-dev sh
+```
+
 ## Workflow
 
 This project demonstrates a framework for a light version of [trunk based development](https://trunkbaseddevelopment.com/). Feature branches are used, with the caveat that they must be kept short lived. No other long lived branches should exist.
